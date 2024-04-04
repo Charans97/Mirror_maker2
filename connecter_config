@@ -1,0 +1,30 @@
+running Mirror maker2 as connector between confluent-platform(source) and confluentcloud(dest)
+
+Connector config
+ {
+  "name":"connector1",
+  "config": {
+    "connector.class": "org.apache.kafka.connect.mirror.MirrorSourceConnector",
+    "name":"connector1",
+    "source.cluster.alias":"source",
+    "source.cluster.bootstrap.servers":"kafka1:9092",
+    "target.cluster.bootstrap.servers":"pkc-12576z.us-west2.gcp.confluent.cloud:9092",
+    "producer.override.bootstrap.servers":"pkc-12576z.us-west2.gcp.confluent.cloud:9092",
+    "producer.override.security.protocol":"SASL_SSL",
+    "producer.override.sasl.jaas.config":"org.apache.kafka.common.security.plain.PlainLoginModule required username='MRVRYDPTBAWJPSHS' password='+Oleh3Pso3ZoOqAoUgMPp5P/QVID8u5Uy6e4YNsm2K89qo5ZCc+BJbn3ifTqg4gf';",
+    "producer.override.sasl.mechanism":"PLAIN",
+    "target.admin.bootstrap.servers":"pkc-12576z.us-west2.gcp.confluent.cloud:9092",
+    "target.admin.security.protocol":"SASL_SSL",
+    "target.admin.sasl.jaas.config":"org.apache.kafka.common.security.plain.PlainLoginModule required username='MRVRYDPTBAWJPSHS' password='+Oleh3Pso3ZoOqAoUgMPp5P/QVID8u5Uy6e4YNsm2K89qo5ZCc+BJbn3ifTqg4gf';",
+    "target.admin.sasl.mechanism":"PLAIN",
+    "client.dns.lookup":"use_all_dns_ips",
+    "acks":"all",
+    "topics": "test2",
+    "offset-syncs.topic.replication.factor":"1",
+    "replication.factor":"3",
+    "errors.log.include.messages": "true",
+    "errors.log.enable": "true"
+  }
+}
+
+curl -X POST -H "Content-Type: application/json" --data @connect.json http://localhost:8083/connectors
